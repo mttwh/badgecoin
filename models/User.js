@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  credentials: {
+    type: Array
   }
 });
 

@@ -89,13 +89,54 @@ router.post("/login", (req, res, next) => {
     failureRedirect: "/users/login",
     failureFlash: true
   })(req, res, next);
+
+  User.findOne({ email: req.body.email }).then(user => {
+    console.log(user);
+    req.session.user = user;
+    req.session.save();
+  });
 });
 
 //Logout GET
 router.get("/logout", (req, res) => {
   req.logout();
+
   req.flash("success_msg", "You are logged out");
   res.redirect("/users/login");
+});
+
+//Credential Model
+const Credential = require("../models/Credential");
+
+//New Credentials GET
+router.get("/new-credentials", (req, res) => {
+  res.render("new-credentials");
+});
+
+//New Credentials POST
+router.post("/new-credentials", (req, res, next) => {
+  let currentUser = req.session.user;
+  const { name, jobCategory, credentialName, issuingOrg } = req.body;
+  let newCredential = new Credential({
+    name,
+    jobCategory,
+    credentialName,
+    issuingOrg
+  });
+
+  //currentUser.newCredential = newCredential;
+
+  User.findOne({ email: currentUser.email }).then(user => {
+    console.log(user);
+    user.credentials.push(newCredential);
+    user.save((err, result) => {
+      if (err) res.sendStatus(500);
+      console.log("Credential written");
+      //res.sendStatus(200);
+    });
+  });
+
+  res.redirect("/dashboard");
 });
 
 module.exports = router;
