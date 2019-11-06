@@ -4,3 +4,26 @@
   Click <a href="/users/new-credentials">Here</a> to add a new credential!
 </h5>
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
+
+<ul>
+  <% credentials.forEach(function(cred){ %>
+  <div class="border">
+    <li>
+      <span>Name:</span>
+      <%- cred.name %>
+    </li>
+    <li>
+      <span>Job Category:</span>
+      <%- cred.jobCategory %>
+    </li>
+    <li>
+      <span>Credential Name:</span>
+      <%- cred.credentialName %>
+    </li>
+    <li>
+      <span>Issuing Organization:</span>
+      <%- cred.issuingOrg %>
+    </li>
+  </div>
+  <%});%>
+</ul>

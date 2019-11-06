@@ -91,7 +91,6 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 
   User.findOne({ email: req.body.email }).then(user => {
-    console.log(user);
     req.session.user = user;
     req.session.save();
   });
