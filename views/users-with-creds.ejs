@@ -1,0 +1,26 @@
+<h1 class="mt-4">Organization Learners</h1>
+
+<ul>
+  <% usersWithCreds.forEach(function(creds){ %>
+  <div class="border" style="padding: 10px; margin: 5px;">
+    <li>
+      <span>Email:</span>
+      <%- creds.email %>
+    </li>
+    <ul>
+      <% creds.credentials.forEach(function(cred){ %>
+      <div class="border" style="margin: 5px; padding: 5px;">
+        <li>
+          <span>Credential Name:</span>
+          <%- cred.credentialName %>
+        </li>
+        <li>
+          <span>Issuing Organization:</span>
+          <%- cred.issuingOrg %>
+        </li>
+      </div>
+      <%});%>
+    </ul>
+  </div>
+  <%});%>
+</ul>

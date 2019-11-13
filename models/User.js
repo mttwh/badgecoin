@@ -19,6 +19,15 @@ const UserSchema = new mongoose.Schema({
   },
   credentials: {
     type: Array
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
+  adminOrg: {
+    type: String,
+    required: false,
+    default: null
   }
 });
 

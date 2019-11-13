@@ -1,0 +1,11 @@
+<h1 class="mt-4">Admin Dashboard</h1>
+<p class="lead mb-3">
+  <%= adminOrg[0].toUpperCase() + adminOrg.substring(1) %> admin
+</p>
+<p>
+  <%= adminOrg[0].toUpperCase() + adminOrg.substring(1) %> currently has <%=
+  numUsersWithCredentials %> users with credentials in the system. Click
+  <a href="/user-credentials">Here</a> to view users with <%=
+  adminOrg[0].toUpperCase() + adminOrg.substring(1) %> credentials.
+</p>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>

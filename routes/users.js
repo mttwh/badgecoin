@@ -114,24 +114,21 @@ router.get("/new-credentials", (req, res) => {
 
 //New Credentials POST
 router.post("/new-credentials", (req, res, next) => {
-  let currentUser = req.session.user;
-  const { name, jobCategory, credentialName, issuingOrg } = req.body;
+  let currentUserId = req.session.passport.user;
+  const { name, issuingOrg, jobCategory, credentialName } = req.body;
   let newCredential = new Credential({
     name,
+    issuingOrg,
     jobCategory,
-    credentialName,
-    issuingOrg
+    credentialName
   });
 
-  //currentUser.newCredential = newCredential;
-
-  User.findOne({ email: currentUser.email }).then(user => {
+  User.findOne({ _id: currentUserId }).then(user => {
     console.log(user);
     user.credentials.push(newCredential);
     user.save((err, result) => {
       if (err) res.sendStatus(500);
       console.log("Credential written");
-      //res.sendStatus(200);
     });
   });
 
