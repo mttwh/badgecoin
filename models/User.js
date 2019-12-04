@@ -1,5 +1,9 @@
+/*
+This model class represents a user within the application
+Class is used to map a user of the app to/from a database object
+Mongoose is an ORM (Object Relational Mapper)
+*/
 const mongoose = require("mongoose");
-
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,

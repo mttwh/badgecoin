@@ -1,3 +1,8 @@
+/*
+This routes class handles all the routes to the root "/" of the application
+For example, the route "router.get("/dashboard")" handles any GET requests
+  to the route "/dashboard"
+*/
 const express = require("express");
 const router = express.Router();
 const { ensureAuthenticated } = require("../config/auth");
@@ -5,9 +10,6 @@ const passport = require("passport");
 
 //User model
 const User = require("../models/User");
-
-//Industry model
-const Industry = require("../models/Industry");
 
 //Welcome page GET
 router.get("/", (req, res) => res.render("welcome"));
@@ -96,6 +98,7 @@ router.get("/user-credentials", ensureAuthenticated, (req, res) => {
         console.log(doc.length);
         //iterating over all users with credentials at adminOrg
         doc.forEach(user => {
+          console.log(user);
           tempUserObject["email"] = user.email;
           let currentUserCreds = user.credentials;
           let relevantCredNum = 0;
@@ -106,23 +109,16 @@ router.get("/user-credentials", ensureAuthenticated, (req, res) => {
             //check if credential is with adminorg
 
             if (cred.issuingOrg == admin.adminOrg) {
-              //console.log(cred);
               relevantCredNum++;
               let relevantCred = "Credential # " + relevantCredNum;
               tempCredObject["credentialName"] = cred.credentialName;
               tempCredObject["issuingOrg"] = cred.issuingOrg;
               credentials.push(tempCredObject);
-              //tempUserObject[relevantCred] = tempCredObject;
-              //userArray.push(tempUserObject);
-              //tempUserObject = {};
               tempCredObject = {};
             }
           }
-          //console.log(credentials);
           tempUserObject["credentials"] = credentials;
           userArray.push(tempUserObject);
-          console.log("user array");
-          console.log(userArray);
         });
 
         res.render("users-with-creds", {

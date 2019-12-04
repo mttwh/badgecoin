@@ -1,5 +1,9 @@
+/*
+This model class represents a credential to be used in the application
+Class is used to map a credential in the app to/from a database object
+Mongoose is an ORM (Object Relational Mapper)
+*/
 const mongoose = require("mongoose");
-
 const CredentialSchema = new mongoose.Schema({
   name: {
     type: String,

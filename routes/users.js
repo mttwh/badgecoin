@@ -1,3 +1,8 @@
+/*
+This routes class handles all routes that start with "/users"
+For example, the route "router.get("/register")" handles GET requests to the 
+  URL "/users/register".
+*/
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
